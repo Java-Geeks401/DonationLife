@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Form to add Charity Organization </h1>
+<form action="#" th:action="@{/charityOrganizationForm}" th:object="${CharityOrganization}" method="post">
+    <p>Name of the Organization : <input type="text" th:field="*{name}" /></p>
+    <p>Email of the Organization :<input type="text" th:field="*{email}" /></p>
+    <p>Facebook page :<input type="text" th:field="*{facebookPage}" /></p>
+    <p>The phone number of the Organization :<input type="text" th:field="*{number}" /></p>
+    <p>The address of the Organization : <input type="text" th:field="*{address}" /></p>
+    <p><input type="submit" value="Add Charity Organization" /> </p>
+
+</form>
+
+</body>
+</html>
