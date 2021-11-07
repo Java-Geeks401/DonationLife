@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>dashbord</title>
+</head>
+<body>
+<header>
+
+</header>
+<main>
+    <h1>this is dash bord page</h1>
+        <div th:each="admin:${adminData}">
+            <div class="card" style="width: 18rem;">
+<!--                <img class="card-img-top" src="..." alt="Card image cap">-->
+                <div class="card-body">
+                    <h5 th:text="${admin.username}"></h5>
+<!--                    <p th:text="${admin.firstname} +' '+ ${admin.lastname}"></p>-->
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+
+        <div th:each="donor:${donaters}">
+            <div class="card" style="width: 18rem;">
+<!--                <img class="card-img-top" src="..." alt="Card image cap">-->
+                <div class="card-body">
+                    <h5 th:text="${donor.username}"></h5>
+<!--                    <p th:text="${donor.firstname+' '+admin.lastname}"></p>-->
+                    <p th:text="${donor.dateOfBirth}"></p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+
+        <div th:each="organization:${organizations}">
+            <div class="card" style="width: 18rem;">
+<!--                <img class="card-img-top" src="..." alt="Card image cap">-->
+                <div class="card-body">
+                    <h5 th:text="${organization.name}"></h5>
+                    <p th:text="${organization.email}"></p>
+                    <p th:text="${organization.facebookPage}"></p>
+                    <p th:text="${organization.number}"></p>
+                    <p th:text="${organization.address}"></p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+
+
+</main>
+</body>
+</html>
