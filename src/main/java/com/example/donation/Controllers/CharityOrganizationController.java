@@ -45,6 +45,6 @@ public class CharityOrganizationController {
         charityOrganizationRepositorie.save(charityOrganization);
         Authentication authentication = new UsernamePasswordAuthenticationToken(charityOrganization, null, new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new RedirectView("/charityProfile");
+        return new RedirectView("/profile");
     }
 }

@@ -18,7 +18,7 @@ public class CatalogController {
 
     @Autowired
     CatalogItemRepository catalogItemRepository;
-
+//
 //    @GetMapping("/addCat")
 //        public String addCat(){
 //        Catalog catalog = new Catalog("kitchen");

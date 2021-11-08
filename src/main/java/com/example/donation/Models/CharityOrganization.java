@@ -1,9 +1,11 @@
 package com.example.donation.Models;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class CharityOrganization implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(unique = true)
     private String username;
     private String password;
     private String name;
@@ -19,6 +22,7 @@ public class CharityOrganization implements UserDetails {
     private String facebookPage;
     private String number;
     private String address;
+    private String authority = "ROLE_CHARITY";
     // relation with donation
     @OneToMany(mappedBy = "charityItems")
     private List<Donation> charityList;
@@ -134,7 +138,10 @@ public class CharityOrganization implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(this.authority);
+        List<SimpleGrantedAuthority> userAuthorities = new ArrayList<>();
+        userAuthorities.add(simpleGrantedAuthority);
+        return userAuthorities;
     }
 
 

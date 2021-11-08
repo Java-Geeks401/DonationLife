@@ -1,6 +1,7 @@
 package com.example.donation.Models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Donation {
@@ -10,22 +11,41 @@ public class Donation {
     private String description;
     private String status;
     // Relation with the static catalog item.
-    @ManyToOne
-    CatalogItem donationsItems;
+    @OneToOne(targetEntity=CatalogItem.class,cascade=CascadeType.ALL)
+    private CatalogItem donationsItems;
     //Relation with the donator.
     @ManyToOne
-    Donator donatorItems;
+    private Donator donatorItems;
     // Relation with the charity
     @ManyToOne
-    CharityOrganization charityItems;
+    private CharityOrganization charityItems;
+    @OneToMany(mappedBy = "donation")
+    private List<DonationReq> donationReqList;
+
     public Donation() {
     }
 
-    public Donation(String description, String status, CatalogItem donationsItems, Donator donatorItems) {
+    public Donation(String description, String status, CatalogItem donationsItems, Donator donatorItems){
         this.description = description;
         this.status = status;
         this.donationsItems = donationsItems;
         this.donatorItems = donatorItems;
+    }
+
+    public CharityOrganization getCharityItems() {
+        return charityItems;
+    }
+
+    public void setCharityItems(CharityOrganization charityItems) {
+        this.charityItems = charityItems;
+    }
+
+    public List<DonationReq> getDonationReqList() {
+        return donationReqList;
+    }
+
+    public void setDonationReqList(List<DonationReq> donationReqList) {
+        this.donationReqList = donationReqList;
     }
 
     public int getDonationId() {
@@ -67,5 +87,6 @@ public class Donation {
     public void setDonatorItems(Donator donatorItems) {
         this.donatorItems = donatorItems;
     }
+
 
 }

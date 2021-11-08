@@ -12,8 +12,10 @@ public class CatalogItem {
     @ManyToOne
     Catalog catalogItems;
     // relation with the donation
-    @OneToMany(mappedBy = "donationsItems")
-    private List<Donation> donationList;
+    @OneToOne(targetEntity=Donation.class,cascade=CascadeType.ALL)
+    private Donation donation;
+    @OneToMany(mappedBy ="catalogItem")
+    private List<DonationReq> donationReqList;
 
     public CatalogItem(){
     }
@@ -22,12 +24,20 @@ public class CatalogItem {
         this.catalogItems = catalogItems;
     }
 
-    public List<Donation> getDonationList() {
-        return donationList;
+    public List<DonationReq> getDonationReqList() {
+        return donationReqList;
     }
 
-    public void setDonationList(List<Donation> donationList) {
-        this.donationList = donationList;
+    public void setDonationReqList(List<DonationReq> donationReqList) {
+        this.donationReqList = donationReqList;
+    }
+
+    public Donation getDonation() {
+        return donation;
+    }
+
+    public void setDonation(Donation donation) {
+        this.donation = donation;
     }
 
     public int getItemId() {

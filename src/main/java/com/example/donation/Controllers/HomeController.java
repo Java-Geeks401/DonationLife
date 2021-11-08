@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -15,7 +16,7 @@ public class HomeController {
     CatalogRepository catalogRepository;
 
     @GetMapping("/")
-    public String getHomePage(Model model){
+    public String getHomePage(Model model, Principal principal){
        List<Catalog> catalog= (List<Catalog>) catalogRepository.findAll();
        model.addAttribute("catList",catalog);
         return "index";

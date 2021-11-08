@@ -12,19 +12,40 @@ public class DonationReq {
         private boolean status;
         @ManyToOne
         private CharityOrganization charityOrganization;
+        @ManyToOne
+        private Donation donation;
+        @ManyToOne
+        private CatalogItem catalogItem;
+
 
 public DonationReq(){
 
 }
 
-    public DonationReq(String discription, boolean status, CharityOrganization charityOrganization) {
+    public DonationReq(String discription, boolean status, CharityOrganization charityOrganization,CatalogItem catalogItem) {
             this.description = discription;
             this.status = status;
             this.charityOrganization=charityOrganization;
+            this.catalogItem=catalogItem;
         }
 
+    public Donation getDonation() {
+        return donation;
+    }
 
-        public int getId() {
+    public void setDonation(Donation donation) {
+        this.donation = donation;
+    }
+
+    public CatalogItem getCatalogItem() {
+        return catalogItem;
+    }
+
+    public void setCatalogItem(CatalogItem catalogItem) {
+        this.catalogItem = catalogItem;
+    }
+
+    public int getId() {
             return id;
         }
 
