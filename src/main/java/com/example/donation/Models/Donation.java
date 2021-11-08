@@ -9,7 +9,7 @@ public class Donation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int donationId;
     private String description;
-    private String status;
+    private boolean status=true;
     // Relation with the static catalog item.
     @OneToOne(targetEntity=CatalogItem.class,cascade=CascadeType.ALL)
     private CatalogItem donationsItems;
@@ -25,9 +25,8 @@ public class Donation {
     public Donation() {
     }
 
-    public Donation(String description, String status, CatalogItem donationsItems, Donator donatorItems){
+    public Donation(String description, CatalogItem donationsItems, Donator donatorItems){
         this.description = description;
-        this.status = status;
         this.donationsItems = donationsItems;
         this.donatorItems = donatorItems;
     }
@@ -64,11 +63,11 @@ public class Donation {
         this.description = description;
     }
 
-    public String getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

@@ -13,30 +13,38 @@
 <header>
 </header>
 <main>
-    <form method="POST" action="/signup">
+    <form onsubmit ="return validateForm() " method="POST" action="/signup">
         <div class="mb-3">
             <label for="username" class="form-label" style="margin-left:2%"> Name:</label>
             <input type="text" class="form-control" id="username" name="username"  style="width:25%;margin-left:2%">
 
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label" style="margin-left:2%">Password:</label>
-            <input type="password" name="password" class="form-control" id="password" style="width:25%;margin-left:2%">
+            <label class="form-label" style="margin-left:2%">password :
+                <input style="margin-left:2%" class="form-control" name="password" id="password" type="password" onkeyup='check();' />
+                <span id = "message1" style="color:red"> </span> <br><br>
+            </label>
         </div>
+        <div class="mb-3">
+            <label class="form-label" style="margin-left:2%">confirm password:
+                <input style="margin-left:2%" class="form-control" type="password" name="confirm_password" id="confirm_password"  onkeyup='check();' />
+                <span id = "message2" style="color:red"> </span> <br><br>
 
+            </label>
+        </div>
         <div class="mb-3">
             <label for="firstName" class="form-label" style="margin-left:2%">First Name:</label>
-            <input type="text" name="firstName" class="form-control" id="firstName" style="width:25%;margin-left:2%">
+            <input required class="form-control" type="text" name="firstName"  id="firstName" style="width:25%;margin-left:2%">
         </div>
 
         <div class="mb-3">
             <label for="lastName" class="form-label" style="margin-left:2%">Last Name:</label>
-            <input type="text" name="lastName" class="form-control" id="lastName" style="width:25%;margin-left:2%">
+            <input required type="text" name="lastName" class="form-control" id="lastName" style="width:25%;margin-left:2%">
         </div>
 
         <div class="mb-3">
             <label for="dateOfBirth" class="form-label" style="margin-left:2%"> Date of Birth:</label>
-            <input type="date" name="dateOfBirth" class="form-control" id="dateOfBirth" style="width:25%;margin-left:2%">
+            <input required type="date" name="dateOfBirth" class="form-control" id="dateOfBirth" style="width:25%;margin-left:2%">
         </div>
 
 
@@ -48,5 +56,41 @@
 <footer>
 
 </footer>
+<script>
+    function validateForm() {
+
+    var pw1 = document.getElementById("password").value;
+    var pw2 = document.getElementById("confirm_password").value;
+
+    if(pw1 == "") {
+      document.getElementById("message1").innerHTML = "**Fill the password please!";
+      return false;
+    }
+
+    if(pw2 == "") {
+      document.getElementById("message2").innerHTML = "**Enter the password please!";
+      return false;
+    }
+
+    //minimum password length validation
+    if(pw1.length < 6) {
+      document.getElementById("message1").innerHTML = "**Password length must be atleast 6 characters";
+      return false;
+    }
+
+    //maximum length of password validation
+    if(pw1.length > 15) {
+      document.getElementById("message1").innerHTML = "**Password length must not exceed 15 characters";
+      return false;
+    }
+
+    if(pw1 != pw2) {
+      document.getElementById("message2").innerHTML = "**Passwords are not same";
+      return false;
+    }
+
+ }
+
+</script>
 </body>
 </html>

@@ -9,7 +9,7 @@ public class DonationReq {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
         private String description;
-        private boolean status;
+        private boolean status=true;
         @ManyToOne
         private CharityOrganization charityOrganization;
         @ManyToOne
@@ -22,9 +22,8 @@ public DonationReq(){
 
 }
 
-    public DonationReq(String discription, boolean status, CharityOrganization charityOrganization,CatalogItem catalogItem) {
+    public DonationReq(String discription,CharityOrganization charityOrganization,CatalogItem catalogItem) {
             this.description = discription;
-            this.status = status;
             this.charityOrganization=charityOrganization;
             this.catalogItem=catalogItem;
         }

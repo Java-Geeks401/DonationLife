@@ -22,15 +22,32 @@
 <!--                        </ul>-->
 
         <div class="list-group">
-            <ul th:each="donation : ${donationList}" style="width: 70%;">
+            <ul th:each="donation : ${donationList}" th:if="${!donation.isStatus == false}" style="width: 70%;">
                 <li >Description :<span th:text="${donation.description}"></span></li>
                 <li >Status :<span th:text="${donation.status}"></span></li>
                 <li th:if="${donation.getDonationsItems().getDonationReqList().size()>0}" >🔴
                 </li>
-                <ul th:each="req : ${donation.getDonationsItems().getDonationReqList()}" style="width: 70%;">
+                <div th:each="req : ${donation.getDonationsItems().getDonationReqList()}">
+                <ul  style="width: 70%;">
                     <li >Description :<span th:text="${req.description}"></span></li>
                     <li >Status :<span th:text="${req.status}"></span></li>
                 </ul>
+                    <form action="/finishDonation" method="post">
+                        <input hidden type="text"id="idForDonationReq" name="idForDonationReq" th:value="${req.getId}">
+                        <input hidden type="text"idForDonation="id" name="idForDonation" th:value="${donation.getDonationId}">
+                        <input type="submit" value=" add donation ">
+                    </form>
+              </div>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <h3 style="margin-left:10px;"> Donation Finished : </h3>
+        <div class="list-group">
+            <ul th:each="donation : ${donationList}" th:if="${donation.isStatus == false}" style="width: 70%;">
+                <li >Description :<span th:text="${donation.description}"></span></li>
+                <li >Status :<span th:text="${donation.status}"></span></li>
+                <li>🟢</li>
             </ul>
         </div>
     </div>

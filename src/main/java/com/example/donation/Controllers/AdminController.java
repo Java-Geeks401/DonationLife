@@ -1,5 +1,6 @@
 package com.example.donation.Controllers;
 
+
 import com.example.donation.Models.*;
 import com.example.donation.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class AdminController {
 
     @GetMapping("/dashbord")
     public String getAdminPanel(Model model, Principal p) {
-        Donator admin = donorRepository.findByUsername(p.getName());
+        Admin admin = adminRepository.findByUsername(p.getName());
         List<Catalog> catalogs= (List<Catalog>) catalogRepository.findAll();
         List<CatalogItem> items= (List<CatalogItem>) catalogItemRepository.findAll();
         List<Donator> donators= (List<Donator>) donorRepository.findAll();
@@ -56,33 +57,37 @@ public class AdminController {
     }
 
     @PostMapping("/admin/addCatalog")
-    public String addCatalog( @RequestParam(value = "name") String name){
+    public RedirectView addCatalog( @RequestParam(value = "name") String name){
         try {
             Catalog catalog = new Catalog(name);
             catalogRepository.save(catalog);
-            return "dashbord";
+            return new RedirectView("/dashbord");
         }catch (Exception e){
-            return "error";
+            return new RedirectView("/error");
         }
     }
 
     @PostMapping("/admin/addItem")
-    public String addPost(@RequestParam(value = "catalogId") String catalogId , @RequestParam(value = "itemName") String itemName){
+    public RedirectView addPost( int catalogId ,String itemName){
         try {
-            Catalog catalog =catalogRepository.findById(Integer.valueOf(catalogId)).get();
+            Catalog catalog =catalogRepository.findById(catalogId).get();
             CatalogItem catalogItem = new CatalogItem(itemName,catalog);
             catalogItemRepository.save(catalogItem);
-            return "dashbord";
+            return new RedirectView("/dashbord");
         }catch (Exception e){
-            return "error";
+            return new RedirectView( "/error");
         }
     }
 
     @RequestMapping("/admin/deletecatalog/{id}")
     public RedirectView deleteCatalog(@PathVariable int id) {
         try {
-            catalogRepository.deleteById(id);
-            return new RedirectView( "/dashbord");
+            if (catalogRepository.findById(id).get().getItemsList().isEmpty()) {
+                catalogRepository.deleteById(id);
+                return new RedirectView( "/dashbord");
+            }else {
+                return new RedirectView("/error");
+            }
         }catch (Exception e){
             return new RedirectView("/error");
         }

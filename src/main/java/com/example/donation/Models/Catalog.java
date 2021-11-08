@@ -8,6 +8,7 @@ public class Catalog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int catalogId;
+    @Column(unique = true)
     private String catalogName;
     @OneToMany(mappedBy = "catalogItems")
     private List<CatalogItem> itemsList;

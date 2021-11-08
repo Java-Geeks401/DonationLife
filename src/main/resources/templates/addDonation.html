@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
@@ -16,20 +16,16 @@
 <main>
   <form action="/addDonation" method="post">
     <div class="mb-3">
-      <label for="description" class="form-label" style="margin-left:2%"> description:</label>
-      <input type="text" class="form-control" id="description" name="description"  style="width:25%;margin-left:2%">
-
+      <label>Description </label>
+      <textarea name="description" id="description"></textarea>
     </div>
-    <div class="mb-3">
-      <label for="status" class="form-label" style="margin-left:2%">status:</label>
-      <input type="text" name="status" class="form-control" id="status" style="width:25%;margin-left:2%">
-    </div>
-
-    <div class="mb-3">
-      <label for="donationItemID" class="form-label">number</label>
-      <input type="number" class="form-control" id="donationItemID" name="donationItemID">
-    </div>
-    <button type="submit" class="btn btn-primary" style="margin-left:2%">add donation</button>
+<!--    <div class="mb-3">-->
+<!--      <label for="status" class="form-label" style="margin-left:2%">status:</label>-->
+<!--      <input type="text" name="status" class="form-control" id="status" style="width:25%;margin-left:2%">-->
+<!--    </div>-->
+    <input hidden type="text"id="id" name="id" th:value="${itemId.itemId}">
+    <input type="submit" value=" add donation ">
+<!--    <button type="submit" class="btn btn-primary" style="margin-left:2%">add donation</button>-->
   </form>
 
 
